@@ -7,21 +7,19 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class HelloController {
     @FXML
-    private Label welcomeText;
+    private AnchorPane mainPane;
 
     private ArrayList<Soundpack> soundpacks = new ArrayList<>();
     private Soundpack currentSoundpack = null;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     @FXML
     public void onPlaySoundBtnPressed(MouseEvent e) {
@@ -38,15 +36,12 @@ public class HelloController {
 
         // On right click
         if (e.getButton() == MouseButton.SECONDARY) {
-            ChoiceDialog<String> dialog = new ChoiceDialog<>("b", currentSoundpack.getAvailableSounds());
-            dialog.setTitle("Binding Dialog" + button.getText());
-            dialog.setHeaderText("Binding for key " + button.getText());
-            dialog.setContentText("Choose a sound:");
-
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                currentSoundpack.addBinding(button.getText(), result.get());
-            }
+            FileChooser browser = new FileChooser();
+            browser.setTitle("Choose audio file");
+            browser.setSelectedExtensionFilter(
+                    new FileChooser.ExtensionFilter("Audio Files", "*.mp3")
+            );
+            File file = browser.showOpenDialog(mainPane.getScene().getWindow());
         }
 
         // On left click
