@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.virtualmusicpad.HelloController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1024.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -164,26 +164,26 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="R" GridPane.columnIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="X" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="T" GridPane.columnIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="V" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="Y" GridPane.columnIndex="3" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="B" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="U" GridPane.columnIndex="4" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="N" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="M" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="&lt;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="&gt;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="Q" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="W" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="I" GridPane.columnIndex="5" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="O" GridPane.columnIndex="6" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="P" GridPane.columnIndex="7" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="[" GridPane.columnIndex="8" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="]" GridPane.columnIndex="9" />
-                              <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="238.0" text="E" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="R" GridPane.columnIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="X" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="T" GridPane.columnIndex="2" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="V" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="Y" GridPane.columnIndex="3" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="B" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="U" GridPane.columnIndex="4" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="N" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="M" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="&lt;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="&gt;" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="Q" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="W" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="I" GridPane.columnIndex="5" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="O" GridPane.columnIndex="6" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="P" GridPane.columnIndex="7" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="[" GridPane.columnIndex="8" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="]" GridPane.columnIndex="9" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onPlaySoundBtnPressed" prefHeight="176.0" prefWidth="238.0" text="E" />
                            </children>
                         </GridPane>
                         <Button layoutX="14.0" layoutY="318.0" mnemonicParsing="false" prefWidth="40.0" text="&lt;" />
