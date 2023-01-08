@@ -1,10 +1,9 @@
 package com.example.virtualmusicpad;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -12,14 +11,29 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class HelloController {
     @FXML
     private AnchorPane mainPane;
 
+    @FXML
+    private ListView<String> soundpackListView;
+
     private ArrayList<Soundpack> soundpacks = new ArrayList<>();
     private Soundpack currentSoundpack = null;
+
+    @FXML
+    public void initialize() {
+        // Load all the soundpacks
+        for (File file : HelloApplication.soundpacksFolder.listFiles()) {
+            soundpacks.add(new Soundpack(file.getPath()));
+        }
+
+        // update soundpacks list view
+        ObservableList<String> soundpackList = FXCollections.observableArrayList();
+        soundpackList.addAll(soundpacks.stream().map(Soundpack::getName).toList());
+        soundpackListView.setItems(soundpackList);
+    }
 
     @FXML
     public void onPlaySoundBtnPressed(MouseEvent e) {

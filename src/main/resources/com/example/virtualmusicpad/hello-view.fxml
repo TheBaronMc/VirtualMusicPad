@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.virtualmusicpad.HelloController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.virtualmusicpad.HelloController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1024.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -102,7 +102,7 @@
                         <Button layoutX="82.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Stop" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="14.0" />
                         <Button layoutX="168.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Start recording" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="14.0" />
                         <ComboBox layoutX="510.0" layoutY="14.0" prefHeight="25.0" prefWidth="109.0" promptText="PATTERN 1" AnchorPane.bottomAnchor="482.0" AnchorPane.rightAnchor="376.6666666666667" AnchorPane.topAnchor="14.0" />
-                        <ListView layoutX="767.0" layoutY="49.0" prefHeight="244.0" prefWidth="200.0" AnchorPane.bottomAnchor="229.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="49.0" />
+                        <ListView fx:id="soundpackListView" layoutX="767.0" layoutY="49.0" prefHeight="244.0" prefWidth="200.0" AnchorPane.bottomAnchor="229.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="49.0" />
                         <Label layoutX="714.6666666666667" layoutY="14.0" text="Available soundpacks" AnchorPane.bottomAnchor="480.6666666666667" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font size="18.0" />
