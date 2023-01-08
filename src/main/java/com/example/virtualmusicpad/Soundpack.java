@@ -1,11 +1,23 @@
 package com.example.virtualmusicpad;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.FileNameMap;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class Soundpack {
     private final String name;
@@ -20,6 +32,12 @@ public class Soundpack {
         this.name = name;
         this.path = HelloApplication.soundpacksFolder.getPath() + File.separator + name;
         this.binding = new HashMap<>();
+
+        File bindingsFile = new File(path + File.separator + "bindings.xml");
+        if (bindingsFile.exists())
+            loadXML(bindingsFile);
+        else
+            createXML();
     }
 
     /**
@@ -31,6 +49,8 @@ public class Soundpack {
     public void addBinding(String keyValue, String soundName) {
         File soundFile = new File(path + File.separator + soundName);
         binding.put(new Key(keyValue), new Sound(soundFile));
+
+        updateXML(keyValue, soundName);
     }
 
     /**
@@ -71,6 +91,114 @@ public class Soundpack {
      * @return Soundpack's path
      */
     public String getPath() { return path; }
+
+    private void loadXML(File bindingsFile) {
+        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(bindingsFile);
+            NodeList bindings = document.getElementsByTagName("binding");
+
+            for (int i = 0; i < bindings.getLength(); i++) {
+                Element binding = (Element) bindings.item(i);
+
+                String keyValue = binding.getAttribute("key");
+                String soundPath = binding.getAttribute("sound");
+
+                this.binding.put(new Key(keyValue), new Sound(soundPath));
+            }
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateXML(String keyValue, String soundName) {
+        File bindingsFile = new File(path + File.separator + "bindings.xml");
+
+        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(bindingsFile);
+
+            Element root = (Element) document.getElementsByTagName("soundpack").item(0);
+
+            // If it exists update the binding
+            boolean updated = false;
+            NodeList bindings = root.getElementsByTagName("binding");
+            for (int i = 0; i < bindings.getLength(); i++) {
+                Element binding = (Element) bindings.item(i);
+
+                if (binding.getAttribute("key").equals(keyValue)) {
+                    binding.setAttribute("sound", soundName);
+                    updated = true;
+                    break;
+                }
+
+            }
+
+            // If not update add a new binding
+            if (!updated) {
+                Element newBinding = document.createElement("binding");
+
+                newBinding.setAttribute("key", keyValue);
+                newBinding.setAttribute("sound", soundName);
+
+                root.appendChild(newBinding);
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(bindingsFile);
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(domSource, streamResult);
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createXML() {
+        File bindingsFile = new File(path + File.separator + "bindings.xml");
+
+        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            Element root = document.createElement("soundpack");
+            document.appendChild(root);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(bindingsFile);
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(domSource, streamResult);
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private class Key {
         private final String keyValue;

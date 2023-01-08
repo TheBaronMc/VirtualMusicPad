@@ -28,7 +28,8 @@ public class HelloController {
     public void initialize() {
         // Load all the soundpacks
         for (File file : HelloApplication.soundpacksFolder.listFiles()) {
-            soundpacks.add(new Soundpack(file.getName()));
+            if (file.exists() && file.isDirectory())
+                soundpacks.add(new Soundpack(file.getName()));
         }
 
         // update soundpacks list view
