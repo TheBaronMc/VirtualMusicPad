@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class HelloController {
@@ -26,7 +28,7 @@ public class HelloController {
     public void initialize() {
         // Load all the soundpacks
         for (File file : HelloApplication.soundpacksFolder.listFiles()) {
-            soundpacks.add(new Soundpack(file.getPath()));
+            soundpacks.add(new Soundpack(file.getName()));
         }
 
         // update soundpacks list view
@@ -56,6 +58,22 @@ public class HelloController {
                     new FileChooser.ExtensionFilter("Audio Files", "*.mp3")
             );
             File file = browser.showOpenDialog(mainPane.getScene().getWindow());
+
+            // Check sound path
+            File soundFile;
+            if (!file.getPath().startsWith(currentSoundpack.getPath())) {
+                soundFile = new File(currentSoundpack.getPath() + File.separator + file.getName());
+                try {
+                    Files.copy(file.toPath(), soundFile.toPath());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+                soundFile = file;
+            }
+
+            // bind sound to key
+            currentSoundpack.addBinding(button.getText(), soundFile.getName());
         }
 
         // On left click

@@ -11,33 +11,15 @@ public class Soundpack {
     private final String name;
     private final String path;
     private HashMap<Key, Sound> binding;
-    private List<String> availableSounds;
 
     /**
      * Create a new soundpack
      * @param name name of the soundpack
-     * @param folderPath folder of the soundpack
      */
-    public Soundpack(String name, String folderPath) {
+    public Soundpack(String name) {
         this.name = name;
-        this.path = folderPath;
+        this.path = HelloApplication.soundpacksFolder.getPath() + File.separator + name;
         this.binding = new HashMap<>();
-
-        // Get all the available sounds in the folder
-        File folder = new File(folderPath);
-        if (!folder.exists() || !folder.isDirectory())
-            throw new IllegalArgumentException(folderPath + " doesn't exist or not a directory");
-        availableSounds = Arrays.stream(folder.listFiles((d, n) -> n.endsWith(".wav") || n.endsWith(".mp3")))
-                .map(File::getName).toList();
-    }
-
-    /**
-     * Create a new soundpack
-     * The soundpack will take the folder name as name
-     * @param folderPath
-     */
-    public Soundpack(String folderPath) {
-        this(new File(folderPath).getName(), folderPath);
     }
 
     /**
@@ -58,6 +40,7 @@ public class Soundpack {
      */
     public void play(String keyValue) {
         Sound sound = binding.get(new Key(keyValue));
+        System.out.println(sound);
 
         if (sound != null)
             sound.play();
@@ -68,7 +51,11 @@ public class Soundpack {
      * @return sounds name
      */
     public List<String> getAvailableSounds() {
-        return availableSounds;
+        File folder = new File(path);
+        if (!folder.exists() || !folder.isDirectory())
+            throw new IllegalArgumentException(folder.getAbsolutePath() + " doesn't exist or not a directory");
+        return Arrays.stream(folder.listFiles((d, n) -> n.endsWith(".wav") || n.endsWith(".mp3")))
+                .map(File::getName).toList();
     }
 
     /**
@@ -79,6 +66,12 @@ public class Soundpack {
         return name;
     }
 
+    /**
+     * Return the path of the Soundpack
+     * @return Soundpack's path
+     */
+    public String getPath() { return path; }
+
     private class Key {
         private final String keyValue;
 
@@ -88,7 +81,13 @@ public class Soundpack {
 
         @Override
         public boolean equals(Object obj) {
-            return keyValue.equals(obj);
+            return (obj instanceof  Key) &&
+                    keyValue.equals(((Key) obj).keyValue);
+        }
+
+        @Override
+        public int hashCode() {
+            return keyValue.hashCode();
         }
     }
 }
