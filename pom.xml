@@ -25,6 +25,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>18-ea+6</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>18-ea+6</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -60,7 +65,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.virtualmusicpad/com.example.virtualmusicpad.HelloApplication
+                            <mainClass>com.example.virtualmusicpad/com.example.virtualmusicpad.MusicApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

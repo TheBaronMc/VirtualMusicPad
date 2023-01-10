@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<soundpack>
+        
+    <binding key="E" sound="chant2.wav"/>
+    
+    <binding key="R" sound="highhats.wav"/>
+</soundpack>
