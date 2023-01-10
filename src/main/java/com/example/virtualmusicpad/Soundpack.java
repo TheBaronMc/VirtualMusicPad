@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.FileNameMap;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -38,6 +36,17 @@ public class Soundpack {
             loadXML(bindingsFile);
         else
             createXML();
+
+        // if there is no binding
+        if (this.binding.isEmpty()) {
+            List<String> availableSounds = getAvailableSounds();
+            List<String> keys = Arrays.asList("X", "C", "V", "B", "N", "M",
+                    ",", ".", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]");
+
+            for (int i = 0; i < availableSounds.size(); i++) {
+                addBinding(keys.get(i), availableSounds.get(i));
+            }
+        }
     }
 
     /**
